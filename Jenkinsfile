@@ -8,7 +8,6 @@ pipeline {
         TAG = "${env.BUILD_NUMBER}"
     }
     stages {
-
         stage('build') {
             steps {
                 sh 'docker build -t "$IMAGE_C:$TAG" -t "$IMAGE_C:latest" ./cart_service'
