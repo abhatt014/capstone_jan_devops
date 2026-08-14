@@ -1,5 +1,5 @@
 pipeline {
-    agent dev
+    agent {"dev"}
     environment {
         IMAGE_C = 'docker.io/amitfreeze/cart_service'
         IMAGE_CAT = 'docker.io/amitfreeze/catalog_service'
