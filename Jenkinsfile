@@ -50,7 +50,7 @@ pipeline {
                 sh 'docker network create ecommerce_net || true'
                 
                 // 3. Start Database with the required password variable and attach to network
-                sh 'docker run -d --network ecommerce_net -p 3306:3306 -e MYSQL_ROOT_PASSWORD=rootpassword --name mysql_db -v $(pwd)/init.sql:/docker-entrypoint-initdb.d/init.sql:z mysql:8.0'
+                sh 'docker run -d --network ecommerce_net -p 3306:3306 -e MYSQL_ROOT_PASSWORD=rootpassword -e MYSQL_DATABASE=ecomm_db --name mysql_db -v $(pwd)/init.sql:/docker-entrypoint-initdb.d/init.sql:z mysql:8.0'
                 
                 // Wait briefly to give MySQL time to initialize before the APIs try to connect
                 sh 'sleep 15'
