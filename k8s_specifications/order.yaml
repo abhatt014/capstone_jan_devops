@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: deployment
+metadata:
+  name: order
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order
+  template:
+    metadata:
+      labels:
+        app: order
+  spec:
+    containers:
+    - name: order
+      image: docker.io/amitfreeze/order_service:latest
+      ports:
+      - containerPort: 5000
+---
+apiVersion: v1
+kind: service
+metadata:
+  name: order
+spec:
+  selector:
+    app: order
+  ports:
+  - port: 5000
+    targetPort: 5000         

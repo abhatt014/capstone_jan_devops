@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: deployment
+metadata:
+  name: cart
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cart
+  template:
+    metadata:
+      labels:
+        app: cart
+  spec:
+    containers:
+    - name: cart
+      image: docker.io/amitfreeze/cart_service:latest
+      ports:
+      - containerPort: 5000
+---
+apiVersion: v1
+kind: service
+metadata:
+  name: catalog
+spec:
+  selector:
+    app: catalog
+  ports:
+  - port: 5000
+    targetPort: 5000         
