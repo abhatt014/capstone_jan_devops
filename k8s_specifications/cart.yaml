@@ -21,10 +21,10 @@ spec:
 apiVersion: v1
 kind: service
 metadata:
-  name: catalog
+  name: cart
 spec:
   selector:
-    app: catalog
+    app: cart
   ports:
   - port: 5000
     targetPort: 5000         
