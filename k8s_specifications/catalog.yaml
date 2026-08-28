@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: catalog
-        image: docker.io/amitfreeze/catalog_service:latest
+        image: docker.io/amitfreeze/catalog_service:22
         ports:
         - containerPort: 5000
 ---

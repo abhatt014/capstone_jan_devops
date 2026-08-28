@@ -15,7 +15,7 @@ spec:
     spec: # Indented correctly under 'template'
       containers:
       - name: cart
-        image: docker.io/amitfreeze/cart_service:latest
+        image: docker.io/amitfreeze/cart_service:22
         ports:
         - containerPort: 5000
 ---
