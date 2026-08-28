@@ -15,7 +15,7 @@ spec:
     spec: # Indented correctly under 'template'
       containers:
       - name: frontend
-        image: docker.io/amitfreeze/frontend:30
+        image: docker.io/amitfreeze/frontend:31
         ports:
         - containerPort: 5000
 ---
