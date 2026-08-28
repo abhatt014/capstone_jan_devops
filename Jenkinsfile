@@ -49,8 +49,8 @@ pipeline {
                 // 2. Commit and push the changes back to GitHub
                 withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_TOKEN', usernameVariable: 'GIT_USER')]) {
                     sh '''
-                        git config user.name "Jenkins Pipeline"
-                        git config user.email "jenkins@yourdomain.com"
+                        git config user.name "student"
+                        git config user.email "student@example.com.com"
                         
                         git add k8s_specifications/*.yaml
                         
