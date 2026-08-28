@@ -86,6 +86,7 @@ pipeline {
             }
         }        
         // stage('deploy') {
+        //
         //     steps {
         //         sh 'docker pull "$IMAGE_C:latest"'
         //         sh 'docker pull "$IMAGE_CAT:latest"'
