@@ -2,8 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: order
-  namespace: capstonenew
-spec:
+  namespace: capstonespec:
   replicas: 1
   selector:
     matchLabels:
@@ -23,8 +22,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: order
-  namespace: capstonenew
-spec:
+  namespace: capstonespec:
   selector:
     app: order
   ports:
