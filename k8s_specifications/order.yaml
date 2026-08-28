@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: order
-        image: docker.io/amitfreeze/order_service:23
+        image: docker.io/amitfreeze/order_service:24
         ports:
         - containerPort: 5000
 ---
