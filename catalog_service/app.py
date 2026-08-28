@@ -4,7 +4,7 @@ import mysql.connector
 app = Flask(__name__)
 
 def get_db():
-    return mysql.connector.connect(host="mysql_db", user="root", password="rootpassword", database="ecomm_db")
+    return mysql.connector.connect(host="mysql", user="root", password="rootpassword", database="ecomm_db")
 
 @app.route('/products', methods=['GET'])
 def get_products():
