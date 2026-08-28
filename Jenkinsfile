@@ -35,7 +35,37 @@ pipeline {
                 }
             }
         }
-        
+        stage('Update Manifests in Git') {
+            when { branch 'main' }
+            steps {
+                // 1. Update the tags in the YAML files using standard sed
+                sh '''
+                    sed -i "s|image: docker.io/amitfreeze/cart_service:.*|image: docker.io/amitfreeze/cart_service:${BUILD_NUMBER}|g" k8s_specifications/cart.yaml
+                    sed -i "s|image: docker.io/amitfreeze/catalog_service:.*|image: docker.io/amitfreeze/catalog_service:${BUILD_NUMBER}|g" k8s_specifications/catalog.yaml
+                    sed -i "s|image: docker.io/amitfreeze/order_service:.*|image: docker.io/amitfreeze/order_service:${BUILD_NUMBER}|g" k8s_specifications/order.yaml
+                    sed -i "s|image: docker.io/amitfreeze/frontend:.*|image: docker.io/amitfreeze/frontend:${BUILD_NUMBER}|g" k8s_specifications/frontend.yaml
+                '''
+                
+                // 2. Commit and push the changes back to GitHub
+                withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_TOKEN', usernameVariable: 'GIT_USER')]) {
+                    sh '''
+                        git config user.name "Jenkins Pipeline"
+                        git config user.email "jenkins@yourdomain.com"
+                        
+                        git add k8s_specifications/*.yaml
+                        
+                        # Only commit if there are actually changes
+                        if ! git diff-index --quiet HEAD --; then
+                            # The [skip ci] tag prevents Jenkins from running the pipeline again in an infinite loop
+                            git commit -m "Update image tags to build ${BUILD_NUMBER} [skip ci]"
+                            git push https://${GIT_USER}:${GIT_TOKEN}@github.com/abhatt014/capstone_jan_devops.git HEAD:main
+                        else
+                            echo "No changes to commit"
+                        fi
+                    '''
+                }
+            }
+        }
         // stage('deploy') {
         //     steps {
         //         sh 'docker pull "$IMAGE_C:latest"'
