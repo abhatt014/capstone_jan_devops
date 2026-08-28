@@ -66,6 +66,25 @@ pipeline {
                 }
             }
         }
+        stage('Cleanup Local Jenkins Images') {
+            steps {
+                sh '''
+                    # Calculate the previous build number
+                    PREV_BUILD=$((BUILD_NUMBER - 1))
+                    
+                    echo "Deleting local images from build ${PREV_BUILD}..."
+                    
+                    # The '|| true' ensures the pipeline doesn't fail if the image was already deleted
+                    docker rmi docker.io/amitfreeze/cart_service:${PREV_BUILD} || true
+                    docker rmi docker.io/amitfreeze/catalog_service:${PREV_BUILD} || true
+                    docker rmi docker.io/amitfreeze/order_service:${PREV_BUILD} || true
+                    docker rmi docker.io/amitfreeze/frontend:${PREV_BUILD} || true
+                    
+                    # Clean up any dangling unused layers
+                    docker image prune -f
+                '''
+            }
+        }        
         // stage('deploy') {
         //     steps {
         //         sh 'docker pull "$IMAGE_C:latest"'
