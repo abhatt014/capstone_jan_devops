@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
-  namespace: capstonenew 
+  namespace: capstone
 spec:
   replicas: 1
   selector:
@@ -23,7 +23,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: frontend
-  namespace: capstonespec:
+  namespace: capstone
+spec:
   type: NodePort # Added to allow nodePort mapping
   selector:
     app: frontend

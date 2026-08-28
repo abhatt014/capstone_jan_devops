@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cart
-  namespace: capstonenew # Added to match the Service
+  namespace: capstone # Added to match the Service
 spec:
   replicas: 1
   selector:
@@ -23,7 +23,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: cart
-  namespace: capstonespec:
+  namespace: capstone
+spec:
   selector:
     app: cart
   ports:
